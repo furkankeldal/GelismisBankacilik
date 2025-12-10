@@ -3,7 +3,6 @@ package com.example.OnlineBankacilik.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,18 +21,18 @@ import com.example.OnlineBankacilik.repository.AccountRepository;
 import com.example.OnlineBankacilik.repository.ProcessRepository;
 import com.example.OnlineBankacilik.service.ProcessService;
 
-import lombok.experimental.var;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
+@Slf4j
 public class ProcessServiceImpl implements ProcessService {
 
-	@Autowired
-	private ProcessRepository processRepository;
-	@Autowired
-	private AccountRepository accountRepository;
-	@Autowired
-	private TransactionProducer transactionProducer;
+	private final ProcessRepository processRepository;
+	private final AccountRepository accountRepository;
+	private final TransactionProducer transactionProducer;
 
 	private Account getAccount(String accountNo) {
 		return accountRepository.findById(accountNo).orElseThrow(() -> new AccountNotFoundException(accountNo));
@@ -66,7 +65,7 @@ public class ProcessServiceImpl implements ProcessService {
 		if (dto.getAmount().compareTo(BigDecimal.ZERO) <= 0)
 			throw new InvalidAmountException();
 		Account ac = getAccount(dto.getAccountNo());
-		var former = ac.getAmount();
+		BigDecimal former = ac.getAmount();
 		ac.deposit(dto.getAmount());
 		accountRepository.save(ac);
 
@@ -93,7 +92,7 @@ public class ProcessServiceImpl implements ProcessService {
 		);
 
 		transactionProducer.publish(event);
-		System.out.println(">>> Kafka’ya gönderilen event: " + event);
+		log.info("Kafka'ya gönderilen deposit event: {}", event);
 
 		return toDto(saved);
 	}
@@ -103,7 +102,7 @@ public class ProcessServiceImpl implements ProcessService {
 		if (dto.getAmount().compareTo(BigDecimal.ZERO) <= 0)
 			throw new InvalidAmountException();
 		Account account = getAccount(dto.getAccountNo());
-		var former = account.getAmount();
+		BigDecimal former = account.getAmount();
 		if (former.compareTo(dto.getAmount()) < 0)
 			throw new InsufficientBalanceException(former, dto.getAmount());
 		account.withdraw(dto.getAmount());
@@ -132,7 +131,7 @@ public class ProcessServiceImpl implements ProcessService {
 		);
 
 		transactionProducer.publish(event);
-		System.out.println(">>> Kafka’ya gönderilen WITHDRAW event: " + event);
+		log.info("Kafka'ya gönderilen withdraw event: {}", event);
 
 		return toDto(saved);
 	}
@@ -154,7 +153,7 @@ public class ProcessServiceImpl implements ProcessService {
 		if (!(a instanceof FuturesAccount fa)) {
 			throw new RuntimeException("Sadece vadeli hesapta faiz islemi yapilabilir");
 		}
-		var former = a.getAmount();
+		BigDecimal former = a.getAmount();
 		fa.interestProcessing();
 		accountRepository.save(fa);
 		Process process = new Process();

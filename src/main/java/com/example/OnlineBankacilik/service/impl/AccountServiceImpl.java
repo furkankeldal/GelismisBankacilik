@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,16 +21,15 @@ import com.example.OnlineBankacilik.repository.AccountRepository;
 import com.example.OnlineBankacilik.repository.CustomerRepository;
 import com.example.OnlineBankacilik.service.AccountService;
 
-import lombok.experimental.var;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-	@Autowired
-	private AccountRepository accountRepository;
-	@Autowired
-	private CustomerRepository customerRepository;
+	private final AccountRepository accountRepository;
+	private final CustomerRepository customerRepository;
 
 	private static final AtomicLong COUNTER = new AtomicLong(1000);
 

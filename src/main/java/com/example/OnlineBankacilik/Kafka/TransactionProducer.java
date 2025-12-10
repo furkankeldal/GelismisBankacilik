@@ -8,7 +8,12 @@ import com.example.OnlineBankacilik.entity.TransactionEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class TransactionProducer {
 
 	private final KafkaTemplate<String, String> kafkaTemplate;
@@ -17,18 +22,13 @@ public class TransactionProducer {
 	@Value("${app.kafka.transaction-topic:transaction-events}")
 	private String transactionTopic;
 
-	public TransactionProducer(KafkaTemplate<String, String> kafkaTemplate, ObjectMapper objectMapper) {
-		this.kafkaTemplate = kafkaTemplate;
-		this.objectMapper = objectMapper;
-	}
-
 	public void publish(TransactionEvent event) {
 		try {
 			String json = objectMapper.writeValueAsString(event);
-			System.out.println(">>> KAFKA TRANSACTION EVENT GÖNDERİLİYOR: " + json);
+			log.info("Kafka transaction event gönderiliyor: {}", json);
 			kafkaTemplate.send(transactionTopic, json);
 		} catch (JsonProcessingException e) {
-			System.err.println("Kafka event serileştirme hatası: " + e.getMessage());
+			log.error("Kafka event serileştirme hatası", e);
 		}
 	}
 }
