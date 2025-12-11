@@ -12,7 +12,7 @@ import com.example.OnlineBankacilik.dto.ProcessResponseDto;
 import com.example.OnlineBankacilik.entity.Account;
 import com.example.OnlineBankacilik.entity.FuturesAccount;
 import com.example.OnlineBankacilik.entity.Process;
-import com.example.OnlineBankacilik.entity.TransactionEvent;
+import com.example.OnlineBankacilik.dto.TransactionEvent;
 import com.example.OnlineBankacilik.enums.TransactionType;
 import com.example.OnlineBankacilik.exception.AccountNotFoundException;
 import com.example.OnlineBankacilik.exception.InsufficientBalanceException;

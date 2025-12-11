@@ -1,4 +1,4 @@
-package com.example.OnlineBankacilik.entity;
+package com.example.OnlineBankacilik.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

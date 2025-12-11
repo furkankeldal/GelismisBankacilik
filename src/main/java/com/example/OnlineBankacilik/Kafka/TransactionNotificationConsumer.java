@@ -3,7 +3,7 @@ package com.example.OnlineBankacilik.Kafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import com.example.OnlineBankacilik.entity.TransactionEvent;
+import com.example.OnlineBankacilik.dto.TransactionEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;

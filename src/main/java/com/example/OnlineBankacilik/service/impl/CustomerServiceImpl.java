@@ -2,12 +2,13 @@ package com.example.OnlineBankacilik.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import com.example.OnlineBankacilik.dto.CustomerRequestDto;
 import com.example.OnlineBankacilik.dto.CustomerResponseDto;
 import com.example.OnlineBankacilik.entity.Customer;
@@ -15,12 +16,14 @@ import com.example.OnlineBankacilik.exception.CustomerNotFoundException;
 import com.example.OnlineBankacilik.repository.CustomerRepository;
 import com.example.OnlineBankacilik.service.CustomerService;
 
+
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired
-	private CustomerRepository customerRepository;
+	
+	private final CustomerRepository customerRepository;
 
 	private CustomerResponseDto toDto(Customer c) {
 		CustomerResponseDto crd = new CustomerResponseDto();
