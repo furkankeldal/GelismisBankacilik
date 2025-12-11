@@ -14,25 +14,61 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler({ AccountNotFoundException.class, CustomerNotFoundException.class,
-			InsufficientBalanceException.class, InvalidAmountException.class })
-	public ResponseEntity<Map<String, Object>> handleGlobal(RuntimeException ex) {
+	@ExceptionHandler(AccountNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> handleAccountNotFound(AccountNotFoundException ex) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("Hata", ex.getClass().getSimpleName());
+		body.put("hata", ex.getClass().getSimpleName());
 		body.put("mesaj", ex.getMessage());
-		body.put("zaman", LocalDateTime.now().toString());
+		body.put("zaman", LocalDateTime.now());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+	}
+
+	@ExceptionHandler(CustomerNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> handleCustomerNotFound(CustomerNotFoundException ex) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("hata", ex.getClass().getSimpleName());
+		body.put("mesaj", ex.getMessage());
+		body.put("zaman", LocalDateTime.now());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+	}
+
+	@ExceptionHandler(InsufficientBalanceException.class)
+	public ResponseEntity<Map<String, Object>> handleInsufficientBalance(InsufficientBalanceException ex) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("hata", ex.getClass().getSimpleName());
+		body.put("mesaj", ex.getMessage());
+		body.put("zaman", LocalDateTime.now());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+	}
+
+	@ExceptionHandler(InvalidAmountException.class)
+	public ResponseEntity<Map<String, Object>> handleInvalidAmount(InvalidAmountException ex) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("hata", ex.getClass().getSimpleName());
+		body.put("mesaj", ex.getMessage());
+		body.put("zaman", LocalDateTime.now());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+	}
+
+	@ExceptionHandler(InvalidAccountTypeException.class)
+	public ResponseEntity<Map<String, Object>> handleInvalidAccountType(InvalidAccountTypeException ex) {
+		Map<String, Object> body = new LinkedHashMap<>();
+		body.put("hata", ex.getClass().getSimpleName());
+		body.put("mesaj", ex.getMessage());
+		body.put("zaman", LocalDateTime.now());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
 		Map<String, Object> body = new LinkedHashMap<>();
-		body.put("Hata", "Validation error");
-		body.put("zaman", LocalDateTime.now().toString());
+		body.put("hata", "ValidationError");
+		body.put("mesaj", "Girilen veriler geçersiz");
+		body.put("zaman", LocalDateTime.now());
 		List<String> errors = ex.getBindingResult().getFieldErrors().stream()
 				.map(e -> e.getField() + ": " + e.getDefaultMessage()).toList();
 		body.put("errors", errors);
-		return ResponseEntity.badRequest().body(body);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
 	}
 
 }

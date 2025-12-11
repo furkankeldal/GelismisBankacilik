@@ -22,7 +22,9 @@ import com.example.OnlineBankacilik.repository.CustomerRepository;
 import com.example.OnlineBankacilik.service.AccountService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -61,6 +63,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public AccountResponseDto accountOpen(AccountRequestDto dto) {
+		log.info("Hesap açma işlemi başlatıldı: müşteriId={}, hesapTipi={}", dto.getCustomerId(), dto.getAccountType());
 		Customer cu = customerRepository.findById(dto.getCustomerId())
 				.orElseThrow(() -> new CustomerNotFoundException(dto.getCustomerId()));
 
@@ -79,6 +82,8 @@ public class AccountServiceImpl implements AccountService {
 		acc.setAmount(dto.getFirstAmount());
 		acc.setCustomer(cu);
 		Account saved = accountRepository.save(acc);
+		log.info("Hesap başarıyla açıldı: hesapNo={}, müşteriId={}, bakiye={}", 
+				saved.getAccountNo(), saved.getCustomer().getId(), saved.getAmount());
 		return toDto(saved);
 	}
 
@@ -107,10 +112,15 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void closeAccount(String accountNo) {
+		log.info("Hesap kapatma işlemi başlatıldı: hesapNo={}", accountNo);
 		Account acc = accountRepository.findById(accountNo).orElseThrow(() -> new AccountNotFoundException(accountNo));
+		if (!acc.isActive()) {
+			log.warn("Hesap zaten kapalı: hesapNo={}", accountNo);
+			throw new RuntimeException("Hesap zaten kapalı");
+		}
 		acc.setActive(false);
 		accountRepository.save(acc);
-
+		log.info("Hesap başarıyla kapatıldı: hesapNo={}", accountNo);
 	}
 
 }

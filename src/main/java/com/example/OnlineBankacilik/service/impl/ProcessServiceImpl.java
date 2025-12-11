@@ -16,6 +16,7 @@ import com.example.OnlineBankacilik.entity.TransactionEvent;
 import com.example.OnlineBankacilik.enums.TransactionType;
 import com.example.OnlineBankacilik.exception.AccountNotFoundException;
 import com.example.OnlineBankacilik.exception.InsufficientBalanceException;
+import com.example.OnlineBankacilik.exception.InvalidAccountTypeException;
 import com.example.OnlineBankacilik.exception.InvalidAmountException;
 import com.example.OnlineBankacilik.repository.AccountRepository;
 import com.example.OnlineBankacilik.repository.ProcessRepository;
@@ -65,6 +66,10 @@ public class ProcessServiceImpl implements ProcessService {
 		if (dto.getAmount().compareTo(BigDecimal.ZERO) <= 0)
 			throw new InvalidAmountException();
 		Account ac = getAccount(dto.getAccountNo());
+		if (!ac.isActive()) {
+			log.warn("Kapalı hesaba para yatırma denemesi: hesapNo={}", dto.getAccountNo());
+			throw new RuntimeException("Kapalı hesaba işlem yapılamaz");
+		}
 		BigDecimal former = ac.getAmount();
 		ac.deposit(dto.getAmount());
 		accountRepository.save(ac);
@@ -102,6 +107,10 @@ public class ProcessServiceImpl implements ProcessService {
 		if (dto.getAmount().compareTo(BigDecimal.ZERO) <= 0)
 			throw new InvalidAmountException();
 		Account account = getAccount(dto.getAccountNo());
+		if (!account.isActive()) {
+			log.warn("Kapalı hesaptan para çekme denemesi: hesapNo={}", dto.getAccountNo());
+			throw new RuntimeException("Kapalı hesaptan işlem yapılamaz");
+		}
 		BigDecimal former = account.getAmount();
 		if (former.compareTo(dto.getAmount()) < 0)
 			throw new InsufficientBalanceException(former, dto.getAmount());
@@ -150,8 +159,12 @@ public class ProcessServiceImpl implements ProcessService {
 	@Override
 	public ProcessResponseDto earnInterest(String accountNo) {
 		Account a = getAccount(accountNo);
+		if (!a.isActive()) {
+			log.warn("Kapalı hesapta faiz işlemi denemesi: hesapNo={}", accountNo);
+			throw new RuntimeException("Kapalı hesapta işlem yapılamaz");
+		}
 		if (!(a instanceof FuturesAccount fa)) {
-			throw new RuntimeException("Sadece vadeli hesapta faiz islemi yapilabilir");
+			throw new InvalidAccountTypeException("Sadece vadeli hesapta faiz işlemi yapılabilir");
 		}
 		BigDecimal former = a.getAmount();
 		fa.interestProcessing();
