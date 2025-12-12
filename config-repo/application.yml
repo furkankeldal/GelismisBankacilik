@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: ${GIT_REPO_URI:https://github.com/your-username/banking-config-repo.git}
+          uri: ${GIT_REPO_URI:https://github.com/your-username/GelismisBankacilik.git}
           default-label: main
 
 eureka:

@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 
 import com.example.OnlineBankacilik.enums.TransactionType;
 
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,11 +16,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "processes")
 public class Process {
 

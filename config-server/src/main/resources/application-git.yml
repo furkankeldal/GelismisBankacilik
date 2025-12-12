@@ -4,8 +4,6 @@ server:
 spring:
   application:
     name: config-server
-  profiles:
-    active: git
   cloud:
     config:
       server:
@@ -19,7 +17,12 @@ spring:
             - '{application}/{profile}'
             - '{application}/{profile}/{label}'
           timeout: 5
-        
+          # Private repository için username ve password ekleyin
+          # username: ${GIT_USERNAME:}
+          # password: ${GIT_PASSWORD:}
+          # Veya SSH kullanmak için:
+          # ignore-local-ssh-settings: false
+          # private-key: ${GIT_PRIVATE_KEY:}
 
 management:
   endpoints:

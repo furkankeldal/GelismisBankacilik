@@ -1,13 +1,18 @@
 server:
-  port: 8080
+  port: 8095
 
 spring:
   application:
     name: api-gateway
+  main:
+    allow-bean-definition-overriding: true
+  config:
+    import: optional:configserver:http://localhost:8888
   cloud:
     config:
       uri: http://localhost:8888
-      fail-fast: true
+      fail-fast: false
+      enabled: true
     gateway:
       routes:
         - id: account-service
