@@ -4,11 +4,13 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: git
   cloud:
     config:
       server:
         git:
-          uri: ${GIT_REPO_URI:https://github.com/your-username/banking-config-repo.git}
+          uri: ${GIT_REPO_URI:https://github.com/furkankeldal/GelismisBankacilik.git}
           clone-on-start: true
           force-pull: true
           default-label: main
@@ -18,7 +20,8 @@ spring:
             - '{application}/{profile}/{label}'
           timeout: 5
         native:
-          search-locations: classpath:/config
+          search-locations: file:./config-repo,classpath:/config
+        
 
 management:
   endpoints:

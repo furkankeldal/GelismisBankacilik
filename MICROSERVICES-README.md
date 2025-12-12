@@ -6,15 +6,22 @@
 - Git repository'den merkezi konfigürasyon yönetimi
 - Tüm servislerin konfigürasyonlarını yönetir
 
+✅ **Eureka Server** - Port 8761 ⭐ YENİ
+- Service Discovery (Servis Keşfi)
+- Tüm microservice'lerin kayıt olduğu merkezi servis
+- Load balancing ve health monitoring
+
 ✅ **API Gateway** - Port 8080  
 - Spring Cloud Gateway
 - Tüm servislere tek noktadan erişim
 - Route yönetimi ve load balancing
+- Eureka ile service discovery
 
 ✅ **Account Service** - Port 9016
 - Mevcut hesap yönetimi servisi
 - Feign Client ile diğer servislerle iletişim
 - Kafka ve Redis entegrasyonu
+- Eureka Client (service discovery)
 
 ## Hızlı Kurulum
 
@@ -50,21 +57,27 @@ spring:
           uri: https://github.com/your-username/banking-config-repo.git
 ```
 
-### 4. Servisleri Başlatma
+### 4. Servisleri Başlatma (Sırayla!)
 
 ```bash
 # 1. Config Server
 cd config-server
 mvn spring-boot:run
 
-# 2. Account Service (yeni terminal)
+# 2. Eureka Server (yeni terminal) ⭐ YENİ
+cd eureka-server
+mvn spring-boot:run
+
+# 3. Account Service (yeni terminal)
 cd account-service  
 mvn spring-boot:run
 
-# 3. API Gateway (yeni terminal)
+# 4. API Gateway (yeni terminal)
 cd api-gateway
 mvn spring-boot:run
 ```
+
+**Önemli:** Servisleri bu sırayla başlatın! Eureka Server, diğer servislerden önce başlamalı.
 
 ## API Kullanımı
 
@@ -94,16 +107,25 @@ public interface CustomerServiceClient {
 }
 ```
 
+## Eureka Dashboard
+
+Eureka Server başladıktan sonra:
+- **URL:** http://localhost:8761
+- Kayıtlı tüm servisleri görüntüleyin
+- Servis durumlarını (UP/DOWN) kontrol edin
+
 ## Dosya Yapısı
 
 ```
 banking-microservices/
 ├── pom-parent.xml              # Parent POM
 ├── config-server/             # Config Server microservice
+├── eureka-server/             # Eureka Server (Service Discovery) ⭐ YENİ
 ├── api-gateway/               # API Gateway microservice
 ├── account-service/           # Account Service microservice
 ├── config-repo/               # Config dosyaları (Git'e yüklenecek)
 ├── SETUP-MICROSERVICES.md     # Detaylı kurulum rehberi
+├── EUREKA-SETUP.md            # Eureka Server rehberi ⭐ YENİ
 └── README-MICROSERVICES.md    # Genel dokümantasyon
 ```
 
@@ -119,8 +141,9 @@ banking-microservices/
 
 ## Sonraki Adımlar
 
-1. Eureka Server ekleyin (service discovery için)
+1. ✅ Eureka Server eklendi (service discovery için)
 2. Customer Service ve Process Service'i ayrı microservice'ler olarak oluşturun
 3. Docker containerization ekleyin
 4. CI/CD pipeline kurun
+5. Eureka Server'ı cluster modunda çalıştırın (production için)
 

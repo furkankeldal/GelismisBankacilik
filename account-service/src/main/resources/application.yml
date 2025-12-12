@@ -50,6 +50,15 @@ logging:
     org.apache.kafka: WARN
     org.hibernate.SQL: DEBUG
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
 management:
   endpoints:
     web:
