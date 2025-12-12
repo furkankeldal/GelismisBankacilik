@@ -1,0 +1,32 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${GIT_REPO_URI:https://github.com/your-username/banking-config-repo.git}
+          clone-on-start: true
+          force-pull: true
+          default-label: main
+          search-paths:
+            - '{application}'
+            - '{application}/{profile}'
+            - '{application}/{profile}/{label}'
+          timeout: 5
+        native:
+          search-locations: classpath:/config
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
+
+logging:
+  level:
+    org.springframework.cloud.config: DEBUG
+

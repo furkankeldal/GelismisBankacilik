@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +15,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import lombok.Data;
+
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "customers")
 public class Customer {
 	
@@ -43,6 +46,7 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Account> accounts = new ArrayList<>();
 
+	
 	@PrePersist
 	protected void onCreate() {
 		if (registrationDate == null) {

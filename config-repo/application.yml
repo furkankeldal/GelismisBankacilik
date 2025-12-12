@@ -1,0 +1,22 @@
+# Global configuration for all services
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${GIT_REPO_URI:https://github.com/your-username/banking-config-repo.git}
+          default-label: main
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.cloud: INFO
+    org.springframework.web: INFO
+
