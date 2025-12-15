@@ -20,7 +20,7 @@ spring:
           predicates:
             - Path=/api/accounts/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
         - id: customer-service
           uri: lb://customer-service
           predicates:

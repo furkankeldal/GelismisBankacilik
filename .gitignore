@@ -39,6 +39,7 @@ mvnw.cmd
 
 ### Application ###
 *.log
+logs/
 *.jar
 *.war
 *.ear
