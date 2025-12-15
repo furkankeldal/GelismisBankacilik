@@ -120,12 +120,12 @@ Sensitive bilgileri environment variable olarak kullanın:
 # Windows PowerShell
 $env:GIT_USERNAME="your-username"
 $env:GIT_PASSWORD="your-token"
-$env:GIT_REPO_URI="https://github.com/furkankeldal/banking-config-repo.git"
+$env:GIT_REPO_URI="https://github.com/furkankeldal/GelismisBankacilik.git"
 
 # Linux/Mac
 export GIT_USERNAME="your-username"
 export GIT_PASSWORD="your-token"
-export GIT_REPO_URI="https://github.com/furkankeldal/banking-config-repo.git"
+export GIT_REPO_URI="https://github.com/furkankeldal/GelismisBankacilik.git"
 ```
 
 ## Hata Giderme

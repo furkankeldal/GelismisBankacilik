@@ -1,0 +1,100 @@
+spring:
+  application:
+    name: account-service
+  main:
+    allow-bean-definition-overriding: true
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000  # 1 saat (milisaniye cinsinden)
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2000ms
+  data:
+    redis:
+      repositories:
+        enabled: false
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 3
+      retry-backoff-ms: 1000
+      acks: all
+      max-in-flight-requests: 5
+    consumer:
+      group-id: notification-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      # Consumer Group Yönetimi - Performans ve Güvenilirlik
+      max-poll-records: 500  # Her poll'da maksimum mesaj sayısı (batch processing)
+      max-poll-interval-ms: 300000  # 5 dakika - Mesaj işleme süresi limiti
+      session-timeout-ms: 30000  # 30 saniye - Consumer çöktüğünde tespit süresi
+      heartbeat-interval-ms: 10000  # 10 saniye - Consumer'ın aktif olduğunu gösterir
+      fetch-min-size: 1  # Minimum fetch size (bytes)
+      fetch-max-wait: 500  # Maximum fetch wait time (ms)
+      # Offset commit stratejisi
+      auto-commit-interval-ms: 5000  # 5 saniyede bir offset commit
+      # Consumer group rebalance ayarları
+      partition-assignment-strategy: org.apache.kafka.clients.consumer.RangeAssignor
+
+server:
+  port: 9016
+
+app:
+  kafka:
+    transaction-topic: transaction-events
+    dlq-topic: transaction-events-dlq  # Dead Letter Queue topic
+    # Consumer Group ID'leri
+    consumer-groups:
+      notification-group: notification-group  # Transaction event'leri için
+      dlq-handler-group: dlq-handler-group  # DLQ mesajları için
+
+logging:
+  level:
+    com.example.OnlineBankacilik: INFO
+    com.example.OnlineBankacilik.Kafka: INFO
+    org.springframework.kafka: INFO
+    org.apache.kafka: WARN
+    org.hibernate.SQL: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,kafka
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+

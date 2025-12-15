@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: customer-service
+  main:
+    allow-bean-definition-overriding: true
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000  # 1 saat (milisaniye cinsinden)
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2000ms
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+server:
+  port: 9017
+
+logging:
+  level:
+    com.example.OnlineBankacilik: INFO
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
