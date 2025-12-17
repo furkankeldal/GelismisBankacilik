@@ -149,23 +149,21 @@ curl http://localhost:8080/actuator/health
 
 ## 🎯 Avantajlar
 
-✅ **Otomatik Service Discovery:** Servisler birbirlerini otomatik bulur
-✅ **Load Balancing:** Eureka ile otomatik load balancing
-✅ **Health Monitoring:** Servis durumlarını izler
-✅ **Dynamic Scaling:** Yeni instance'lar otomatik keşfedilir
-✅ **Resilience:** Servis çökerse otomatik olarak registry'den çıkarılır
+✅ **Otomatik Service Discovery:** Servisler birbirlerini otomatik bulur  
+✅ **Load Balancing:** Eureka ile otomatik load balancing  
+✅ **Health Monitoring:** Servis durumlarını izler  
+✅ **Dynamic Scaling:** Yeni instance'lar otomatik keşfedilir  
+✅ **Resilience:** Servis çökerse otomatik olarak registry'den çıkarılır  
 
 ## 📝 Notlar
 
-⚠️ **Eureka Server:** İlk başlatılması gereken servis (Config Server'dan sonra)
-
-⚠️ **Client Registration:** Servisler başladıktan sonra Eureka'ya kayıt olması 30-60 saniye sürebilir
-
-⚠️ **Heartbeat:** Servisler her 30 saniyede bir heartbeat gönderir
-
-✅ **Production:** Production ortamında Eureka Server'ı cluster modunda çalıştırın
+⚠️ **Eureka Server:** İlk başlatılması gereken servis (Config Server'dan sonra)  
+⚠️ **Client Registration:** Servisler başladıktan sonra Eureka'ya kayıt olması 30-60 saniye sürebilir  
+⚠️ **Heartbeat:** Servisler her 30 saniyede bir heartbeat gönderir  
+✅ **Production:** Production ortamında Eureka Server'ı cluster modunda çalıştırın  
 
 ## 🎉 Tamamlandı!
 
 Artık microservice'leriniz Eureka Server üzerinden birbirlerini keşfedebilir ve iletişim kurabilir! 🚀
+
 

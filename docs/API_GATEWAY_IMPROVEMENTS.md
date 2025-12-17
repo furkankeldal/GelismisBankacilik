@@ -263,3 +263,4 @@ API Gateway artık production-ready:
 
 Detaylı konfigürasyon için `config-repo/api-gateway.yml` dosyasına bakın.
 
+

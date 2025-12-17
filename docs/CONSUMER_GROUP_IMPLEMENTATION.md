@@ -227,11 +227,12 @@ spring:
 
 Consumer Group yönetimi başarıyla uygulandı:
 
-✅ **Performans**: Batch processing ve parallel işleme
-✅ **Güvenilirlik**: Fault tolerance ve otomatik recovery
-✅ **Ölçeklenebilirlik**: Yeni instance'lar kolayca eklenebilir
-✅ **Monitoring**: Actuator endpoints ve metrics
-✅ **Yönetilebilirlik**: Configuration-based group ID yönetimi
+✅ **Performans**: Batch processing ve parallel işleme  
+✅ **Güvenilirlik**: Fault tolerance ve otomatik recovery  
+✅ **Ölçeklenebilirlik**: Yeni instance'lar kolayca eklenebilir  
+✅ **Monitoring**: Actuator endpoints ve metrics  
+✅ **Yönetilebilirlik**: Configuration-based group ID yönetimi  
 
 Sistem artık production-ready bir Consumer Group yönetimine sahip!
+
 

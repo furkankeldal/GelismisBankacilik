@@ -145,10 +145,11 @@ export GIT_REPO_URI="https://github.com/furkankeldal/GelismisBankacilik.git"
 
 ## Öneri
 
-**Geliştirme ortamı için:** Native mod kullanın (şu anki yapılandırma)
+**Geliştirme ortamı için:** Native mod kullanın (şu anki yapılandırma)  
 **Production ortamı için:** Git repository kullanın
 
 ## Mevcut Yapılandırma
 
 Şu anda Config Server **native mod** kullanıyor ve `config-repo/` klasöründeki dosyaları okuyor. Bu yapılandırma çalışmaya hazır!
+
 

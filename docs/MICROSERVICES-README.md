@@ -147,3 +147,4 @@ banking-microservices/
 4. CI/CD pipeline kurun
 5. Eureka Server'ı cluster modunda çalıştırın (production için)
 
+

@@ -40,11 +40,11 @@ Bu proje, Spring Cloud kullanılarak geliştirilmiş bir microservices bankacıl
 
 ## 📚 Dokümantasyon
 
-- [HOW_TO_RUN.md](HOW_TO_RUN.md): Sistem çalıştırma kılavuzu
-- [RESILIENCE_FAULT_TOLERANCE.md](RESILIENCE_FAULT_TOLERANCE.md): Resilience ve Fault Tolerance açıklamaları
-- [DOCKER_SETUP.md](DOCKER_SETUP.md): Docker kurulum ve kullanım kılavuzu
-- [SWAGGER_OPENAPI.md](SWAGGER_OPENAPI.md): Swagger/OpenAPI dokümantasyonu
-- [CI_CD_PIPELINE.md](CI_CD_PIPELINE.md): CI/CD pipeline dokümantasyonu
+- [HOW_TO_RUN.md](docs/HOW_TO_RUN.md): Sistem çalıştırma kılavuzu
+- [RESILIENCE_FAULT_TOLERANCE.md](docs/RESILIENCE_FAULT_TOLERANCE.md): Resilience ve Fault Tolerance açıklamaları
+- [DOCKER_SETUP.md](docs/DOCKER_SETUP.md): Docker kurulum ve kullanım kılavuzu
+- [SWAGGER_OPENAPI.md](docs/SWAGGER_OPENAPI.md): Swagger/OpenAPI dokümantasyonu
+- [CI_CD_PIPELINE.md](docs/CI_CD_PIPELINE.md): CI/CD pipeline dokümantasyonu
 
 ## 🚀 Hızlı Başlangıç
 

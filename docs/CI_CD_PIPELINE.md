@@ -204,3 +204,4 @@ Sonuçlar GitHub Security sekmesinde görüntülenir.
 - [Docker Buildx Documentation](https://docs.docker.com/buildx/)
 - [Trivy Documentation](https://aquasecurity.github.io/trivy/)
 
+

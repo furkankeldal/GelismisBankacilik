@@ -282,8 +282,9 @@ spring:
 
 ## Özet
 
-- **A (DLQ):** Başarısız mesajların kaybolmaması için özel topic'e gönderme
-- **B (TTL):** Cache verilerinin otomatik olarak belirli süre sonra silinmesi
-- **C (Consumer Group):** Mesaj dağıtımı, load balancing ve fault tolerance için
-- **D (Cluster Mode):** Redis'in birden fazla node'da çalışarak ölçeklenebilirlik ve yüksek erişilebilirlik sağlaması
+- **A (DLQ):** Başarısız mesajların kaybolmaması için özel topic'e gönderme  
+- **B (TTL):** Cache verilerinin otomatik olarak belirli süre sonra silinmesi  
+- **C (Consumer Group):** Mesaj dağıtımı, load balancing ve fault tolerance için  
+- **D (Cluster Mode):** Redis'in birden fazla node'da çalışarak ölçeklenebilirlik ve yüksek erişilebilirlik sağlaması  
+
 

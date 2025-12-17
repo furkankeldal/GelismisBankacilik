@@ -180,3 +180,5 @@ Circuit Breaker durumunu ve metriklerini izlemek için:
 2. **Timeout Değerleri**: Timeout değerleri servislerin normal yanıt sürelerine göre ayarlanmalıdır
 3. **Retry Stratejisi**: Kritik olmayan işlemler için retry kullanılmalı, idempotent olmayan işlemler için dikkatli olunmalıdır
 4. **Circuit Breaker Threshold**: Hata eşiği, servislerin normal hata oranlarına göre ayarlanmalıdır
+
+
