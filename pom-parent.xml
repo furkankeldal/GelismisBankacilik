@@ -25,6 +25,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <resilience4j.version>2.1.0</resilience4j.version>
+        <lombok.version>1.18.36</lombok.version>
     </properties>
 
     <modules>
@@ -56,6 +57,13 @@
                 <artifactId>resilience4j-feign</artifactId>
                 <version>${resilience4j.version}</version>
             </dependency>
+            <!-- Lombok (use stable release from Maven Central) -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -70,25 +78,7 @@
         </pluginManagement>
     </build>
 
-    <repositories>
-        <repository>
-            <id>projectlombok.org</id>
-            <url>https://projectlombok.org/edge-releases</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>projectlombok.org</id>
-            <url>https://projectlombok.org/edge-releases</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
 
