@@ -283,6 +283,8 @@ services:
       - "8095:8095"
     environment:
       SPRING_PROFILES_ACTIVE: default
+      # JWT secret (at least 32 chars). Prefer setting via .env instead of hardcoding.
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-change-me-to-a-long-random-secret-at-least-32-chars}
       # Mevcut Redis container'ınızı kullanıyorsanız container adını kullanın
       SPRING_REDIS_HOST: ${REDIS_HOST:-redis}
       SPRING_REDIS_PORT: ${REDIS_PORT:-6379}
