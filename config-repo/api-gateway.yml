@@ -81,7 +81,9 @@ app:
       window-seconds: 60
   # JWT Configuration
   jwt:
-    secret: mySecretKeyForJWTTokenGenerationAndValidationMustBeAtLeast256BitsLongForSecurity
+    # Prefer setting this via env var in docker-compose / CI:
+    # APP_JWT_SECRET="at-least-32-chars-long-secret-key........"
+    secret: ${APP_JWT_SECRET:mySecretKeyForJWTTokenGenerationAndValidationMustBeAtLeast256BitsLongForSecurity}
     expiration: 86400000  # 24 saat (milliseconds)
   # Authentication Configuration
   auth:
