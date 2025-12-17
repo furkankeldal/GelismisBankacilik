@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: account-service
+
+  # Config Server'ı testlerde kapat
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      enabled: false
+
+  # Testler için H2 in-memory database
+  datasource:
+    url: jdbc:h2:mem:accountdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  # Redis auto-config testlerde devre dışı
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    org.springframework: WARN
+    com.example.OnlineBankacilik: INFO
+
+

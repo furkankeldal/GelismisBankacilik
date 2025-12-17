@@ -1,24 +1,32 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/bankdb
+    driverClassName: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
+    open-in-view: false
   cache:
     type: redis
     redis:
       time-to-live: 3600000  # 1 saat (milisaniye cinsinden)
-  redis:
-    host: localhost
-    port: 6379
-    timeout: 2000ms
   data:
     redis:
+      host: redis
+      port: 6379
+      timeout: 2000ms
       repositories:
         enabled: false
 
@@ -32,7 +40,7 @@ logging:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
   instance:
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 30

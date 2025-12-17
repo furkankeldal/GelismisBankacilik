@@ -1,57 +1,15 @@
+# Minimal bootstrap configuration - Tüm konfigürasyonlar Config Server'dan gelir
 server:
   port: 8095
 
 spring:
   application:
     name: api-gateway
-  main:
-    allow-bean-definition-overriding: true
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://config-server:8888
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config-server:8888
       fail-fast: false
       enabled: true
-    gateway:
-      routes:
-        - id: account-service
-          uri: lb://account-service
-          predicates:
-            - Path=/api/accounts/**
-          filters:
-            - StripPrefix=1
-        - id: customer-service
-          uri: lb://customer-service
-          predicates:
-            - Path=/api/customers/**
-          filters:
-            - StripPrefix=2
-        - id: process-service
-          uri: lb://process-service
-          predicates:
-            - Path=/api/processes/**
-          filters:
-            - StripPrefix=2
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,gateway
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
 

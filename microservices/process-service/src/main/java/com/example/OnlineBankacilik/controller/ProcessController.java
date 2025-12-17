@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.OnlineBankacilik.dto.ProcessRequestDto;
 import com.example.OnlineBankacilik.dto.ProcessResponseDto;
 import com.example.OnlineBankacilik.service.ProcessService;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 

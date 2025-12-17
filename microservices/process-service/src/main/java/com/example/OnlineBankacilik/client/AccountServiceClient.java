@@ -12,8 +12,10 @@ import com.example.OnlineBankacilik.dto.TransactionRequestDto;
 /**
  * Account Service Feign Client
  * Doğrudan account-service ile iletişim kurar (Eureka service discovery kullanır)
+ * Resilience4j ile Circuit Breaker, Retry ve Timeout desteği
+ * Resilience4j yapılandırması application.yml'de tanımlıdır
  */
-@FeignClient(name = "account-service")
+@FeignClient(name = "account-service", fallback = AccountServiceClientFallback.class)
 public interface AccountServiceClient {
 
     @GetMapping("/accounts/{accountNo}")

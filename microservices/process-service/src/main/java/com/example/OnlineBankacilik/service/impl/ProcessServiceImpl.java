@@ -38,9 +38,21 @@ public class ProcessServiceImpl implements ProcessService {
 
 	private AccountResponseDto getAccount(String accountNo) {
 		try {
-			return accountServiceClient.getAccount(accountNo);
+			log.debug("Account Service'den hesap bilgisi alınıyor: accountNo={}", accountNo);
+			AccountResponseDto account = accountServiceClient.getAccount(accountNo);
+			if (account == null) {
+				log.warn("Account Service null döndü: accountNo={}", accountNo);
+				throw new AccountNotFoundException(accountNo);
+			}
+			log.debug("Hesap bulundu: accountNo={}, customerId={}, balance={}", 
+				accountNo, account.getCustomerId(), account.getAmount());
+			return account;
+		} catch (AccountNotFoundException e) {
+			log.error("Hesap bulunamadı (AccountNotFoundException): {}", accountNo, e);
+			throw e;
 		} catch (Exception e) {
-			log.error("Hesap bulunamadı: {}", accountNo, e);
+			log.error("Account Service'den hesap bilgisi alınırken hata: accountNo={}, error={}", 
+				accountNo, e.getMessage(), e);
 			throw new AccountNotFoundException(accountNo);
 		}
 	}

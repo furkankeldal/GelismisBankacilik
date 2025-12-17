@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.OnlineBankacilik.dto.CustomerRequestDto;
 import com.example.OnlineBankacilik.dto.CustomerResponseDto;
 import com.example.OnlineBankacilik.service.CustomerService;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 

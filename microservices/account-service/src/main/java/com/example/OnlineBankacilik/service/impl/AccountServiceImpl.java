@@ -2,9 +2,12 @@ package com.example.OnlineBankacilik.service.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,6 +94,10 @@ public class AccountServiceImpl implements AccountService {
 		acc.setAccountNo(newAccountNo());
 		acc.setAmount(dto.getFirstAmount());
 		acc.setCustomerId(dto.getCustomerId());
+		// openingDate'i manuel olarak set et (@PrePersist sadece INSERT'te çalışır)
+		if (acc.getOpeningDate() == null) {
+			acc.setOpeningDate(LocalDateTime.now());
+		}
 		Account saved = accountRepository.save(acc);
 		log.info("Hesap başarıyla açıldı: hesapNo={}, müşteriId={}, bakiye={}", 
 				saved.getAccountNo(), saved.getCustomerId(), saved.getAmount());

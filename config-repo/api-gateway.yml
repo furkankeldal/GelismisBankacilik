@@ -8,27 +8,89 @@ spring:
             - Path=/api/accounts/**
           filters:
             - StripPrefix=1
+            # Rate limiter geçici olarak devre dışı (Redis bağlantı sorunu için)
+            # - name: RequestRateLimiter
+            #   args:
+            #     redis-rate-limiter.replenishRate: 10
+            #     redis-rate-limiter.burstCapacity: 20
+            #     redis-rate-limiter.requestedTokens: 1
+            #     key-resolver: "#{@ipKeyResolver}"
         - id: customer-service
-          uri: lb://customer-service
+          uri: lb://customer-service  # Eureka service discovery
           predicates:
             - Path=/api/customers/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
+            # Rate limiter geçici olarak devre dışı (test için)
+            # - name: RequestRateLimiter
+            #   args:
+            #     redis-rate-limiter.replenishRate: 10
+            #     redis-rate-limiter.burstCapacity: 20
+            #     redis-rate-limiter.requestedTokens: 1
+            #     key-resolver: "#{@ipKeyResolver}"
         - id: process-service
           uri: lb://process-service
           predicates:
             - Path=/api/processes/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
+            # Rate limiter geçici olarak devre dışı (Redis bağlantı sorunu için)
+            # - name: RequestRateLimiter
+            #   args:
+            #     redis-rate-limiter.replenishRate: 10
+            #     redis-rate-limiter.burstCapacity: 20
+            #     redis-rate-limiter.requestedTokens: 1
+            #     key-resolver: "#{@ipKeyResolver}"
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+      # Global CORS configuration
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: "*"  # allowCredentials ile uyumlu
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+            allowedHeaders: "*"
+            allowCredentials: true
+  # Redis configuration for rate limiting
+  data:
+    redis:
+      host: redis
+      port: 6379
+      timeout: 2000ms
+
+# Application-specific configurations
+app:
+  gateway:
+    auth:
+      enabled: false  # Geçici olarak devre dışı (test için)
+      api-key-header: X-API-Key
+      jwt-header: Authorization
+      public-paths:
+        - /api/auth  # Login endpoint'i public olmalı
+        - /actuator
+    rate-limit:
+      enabled: true
+      requests-per-minute: 60
+      window-seconds: 60
+  # JWT Configuration
+  jwt:
+    secret: mySecretKeyForJWTTokenGenerationAndValidationMustBeAtLeast256BitsLongForSecurity
+    expiration: 86400000  # 24 saat (milliseconds)
+  # Authentication Configuration
+  auth:
+    default-users: admin:admin123,user:user123  # Format: username1:password1,username2:password2
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
   instance:
     prefer-ip-address: true
 
@@ -36,5 +98,17 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,gateway
+        include: health,info,gateway,prometheus,metrics
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    com.example.gateway: INFO
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.data.redis: INFO
 

@@ -1,0 +1,57 @@
+name: Docker Compose Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  docker-compose-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Compose
+      run: |
+        docker compose version
+
+    - name: Build Docker images
+      run: |
+        docker compose build
+
+    - name: Start services
+      run: |
+        docker compose up -d
+        docker compose ps
+
+    - name: Wait for services to be healthy
+      run: |
+        timeout 300 bash -c 'until docker compose ps | grep -q "healthy"; do sleep 5; done' || true
+        docker compose ps
+
+    - name: Check service health (only via gateway + infra)
+      run: |
+        # Infra
+        curl -f http://localhost:8761/actuator/health || exit 1
+        curl -f http://localhost:8888/actuator/health || exit 1
+        # Gateway
+        curl -f http://localhost:8095/actuator/health || exit 1
+        # Microservices health via API Gateway discovery routes
+        curl -f http://localhost:8095/customer-service/actuator/health || exit 1
+        curl -f http://localhost:8095/account-service/actuator/health || exit 1
+        curl -f http://localhost:8095/process-service/actuator/health || exit 1
+
+    - name: View logs on failure
+      if: failure()
+      run: |
+        docker compose logs --tail=100
+
+    - name: Stop services
+      if: always()
+      run: |
+        docker compose down -v
+

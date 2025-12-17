@@ -16,7 +16,6 @@ import com.example.OnlineBankacilik.dto.AccountRequestDto;
 import com.example.OnlineBankacilik.dto.AccountResponseDto;
 import com.example.OnlineBankacilik.dto.TransactionRequestDto;
 import com.example.OnlineBankacilik.service.AccountService;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 

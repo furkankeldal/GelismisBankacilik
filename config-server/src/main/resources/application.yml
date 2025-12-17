@@ -5,21 +5,21 @@ spring:
   application:
     name: config-server
   profiles:
-    active: git
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: ${GIT_REPO_URI:https://github.com/furkankeldal/GelismisBankacilik.git}
-          clone-on-start: true
-          force-pull: true
-          default-label: main
-          search-paths:
-            - '{application}'
-            - '{application}/{profile}'
-            - '{application}/{profile}/{label}'
-          timeout: 5
-        
+        native:
+          search-locations: ${SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS:file:///${user.dir}/../config-repo},classpath:/config-repo
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
 
 management:
   endpoints:
