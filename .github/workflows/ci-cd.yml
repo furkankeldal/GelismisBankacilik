@@ -62,8 +62,14 @@ jobs:
         SPRING_REDIS_HOST: localhost
         SPRING_REDIS_PORT: 6379
 
-    - name: Generate test reports
+    - name: Debug - list surefire reports (if any)
       if: always()
+      run: |
+        echo "Searching for surefire/failsafe report files..."
+        find . -type f \( -path "*/target/surefire-reports/*.xml" -o -path "*/target/failsafe-reports/*.xml" \) -maxdepth 6 -print || true
+
+    - name: Generate test reports
+      if: always() && hashFiles('**/target/surefire-reports/*.xml') != ''
       uses: dorny/test-reporter@v1
       with:
         name: Maven Tests
