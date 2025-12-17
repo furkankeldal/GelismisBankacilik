@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.math.BigDecimal;
 
@@ -48,6 +49,10 @@ class AccountServiceIntegrationTest {
 
     @MockBean
     private TransactionProducer transactionProducer;
+
+    // Kafka yok; consumer bean'i KafkaTemplate ister. Context yüklenirken patlamasın diye mock'luyoruz.
+    @MockBean
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Test
     @DisplayName("Hesap aç + para yatır + hesabı getir - Tam uçtan uca akış")
