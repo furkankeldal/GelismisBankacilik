@@ -131,8 +131,8 @@ class AccountServiceTest {
 	@Test
 	@DisplayName("Should throw exception when customer not found")
 	void testAccountOpen_CustomerNotFound_ThrowsException() {
-		// Given
-		when(customerServiceClient.getCustomerById(999L)).thenReturn(null);
+		// Given - testAccountRequest 1L customer ID kullanıyor, bu yüzden 1L için null döndürmeliyiz
+		when(customerServiceClient.getCustomerById(1L)).thenReturn(null);
 
 		// When & Then
 		assertThrows(RuntimeException.class, () -> accountService.accountOpen(testAccountRequest));
