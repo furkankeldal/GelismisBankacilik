@@ -46,7 +46,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
 		// Public path kontrolü
 		if (isPublicPath(path)) {
-			log.debug("Public path - Authentication bypassed: {}", path);
+			log.info("Public path - Authentication bypassed: {}", path);
 			return chain.filter(exchange);
 		}
 
@@ -95,7 +95,15 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 			return false;
 		}
 		for (String publicPath : publicPaths) {
+			// Exact match veya starts with kontrolü
 			if (path.startsWith(publicPath)) {
+				return true;
+			}
+			// /actuator için: path içinde /actuator varsa public kabul et
+			// Bu sayede /customer-service/actuator/health gibi path'ler de çalışır
+			// Eureka discovery locator ile oluşan path'ler için: /{service-name}/actuator/**
+			if (publicPath.equals("/actuator") && path.contains("/actuator")) {
+				log.debug("Actuator path detected as public: {}", path);
 				return true;
 			}
 		}
