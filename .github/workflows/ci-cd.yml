@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+# Test reporter'ın check run oluşturabilmesi için permissions gerekli
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
 env:
   MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
   JAVA_VERSION: '21'
@@ -100,13 +106,15 @@ jobs:
         find . -type f \( -path "*/target/surefire-reports/*.xml" -o -path "*/target/failsafe-reports/*.xml" \) -maxdepth 6 -print || true
 
     - name: Generate test reports
-      if: always() && hashFiles('**/target/surefire-reports/*.xml') != ''
+      if: always()
       uses: dorny/test-reporter@v1
       with:
         name: Maven Tests
         path: '**/target/surefire-reports/*.xml'
         reporter: java-junit
         fail-on-error: false
+        list-suites: all
+        list-tests: all
 
   docker-build:
     runs-on: ubuntu-latest
