@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: process-service
+
+  # Config Server'ı testlerde kapat
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      enabled: false
+
+  # Integration testler için PostgreSQL (CI/CD'de PostgreSQL servisi var)
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/bankdb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    org.springframework: WARN
+    com.example.OnlineBankacilik: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
