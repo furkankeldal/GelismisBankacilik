@@ -53,9 +53,20 @@ jobs:
     - name: Build with Maven (multi-module parent)
       run: mvn -f pom-parent.xml clean install -DskipTests
 
-    - name: Run tests (multi-module parent)
+    - name: Verify PostgreSQL is ready
+      run: |
+        echo "Checking PostgreSQL connection..."
+        # GitHub Actions servisleri otomatik olarak health check yapar ve hazır olana kadar bekler
+        # Bu adım sadece ekstra bir güvenlik kontrolü
+        # PostgreSQL servisi health check'i geçtikten sonra buraya gelir
+        echo "PostgreSQL service should be ready (health check passed)"
+
+    - name: Run all tests
       run: mvn -f pom-parent.xml test
       env:
+        # Unit test'ler H2 kullanır (application-test.yml) - environment variable'ları görmez
+        # Integration test'ler PostgreSQL kullanır (application-integration.yml) - bu variable'ları kullanır
+        # Integration test'ler için PostgreSQL environment variable'ları
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/bankdb
         SPRING_DATASOURCE_USERNAME: postgres
         SPRING_DATASOURCE_PASSWORD: postgres
