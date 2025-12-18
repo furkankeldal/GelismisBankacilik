@@ -105,9 +105,15 @@ jobs:
       run: |
         echo "Searching for surefire/failsafe report files..."
         find . -type f \( -path "*/target/surefire-reports/*.xml" -o -path "*/target/failsafe-reports/*.xml" \) -maxdepth 6 -print || true
+        # Test report dosyası sayısını kontrol et
+        REPORT_COUNT=$(find . -type f \( -path "*/target/surefire-reports/*.xml" -o -path "*/target/failsafe-reports/*.xml" \) -maxdepth 6 2>/dev/null | wc -l)
+        echo "Found $REPORT_COUNT test report file(s)"
+        echo "REPORT_COUNT=$REPORT_COUNT" >> $GITHUB_ENV
 
     - name: Generate test reports
       if: always()
+      continue-on-error: true
+      timeout-minutes: 3
       uses: dorny/test-reporter@v1
       with:
         name: Maven Tests
@@ -116,6 +122,7 @@ jobs:
         fail-on-error: false
         list-suites: all
         list-tests: all
+        max-annotations: 50
 
   docker-build:
     runs-on: ubuntu-latest
