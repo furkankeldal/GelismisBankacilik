@@ -12,8 +12,7 @@ RUN mvn install -N -f /app/pom-parent.xml -B
 # Child POM ve source'ları kopyala
 COPY microservices/process-service/pom.xml /app/microservices/process-service/
 COPY microservices/process-service/src /app/microservices/process-service/src
-# Dependency'leri indir ve build et
-RUN mvn dependency:go-offline -f /app/microservices/process-service/pom.xml -B
+# Build et (dependency'ler otomatik indirilir)
 RUN mvn clean package -f /app/microservices/process-service/pom.xml -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine

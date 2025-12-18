@@ -12,8 +12,7 @@ RUN mvn install -N -f /app/pom-parent.xml -B
 # Child POM ve source'ları kopyala
 COPY config-server/pom.xml /app/config-server/
 COPY config-server/src /app/config-server/src
-# Dependency'leri indir ve build et
-RUN mvn dependency:go-offline -f /app/config-server/pom.xml -B
+# Build et (dependency'ler otomatik indirilir)
 RUN mvn clean package -f /app/config-server/pom.xml -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine

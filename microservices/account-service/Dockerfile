@@ -12,8 +12,7 @@ RUN mvn install -N -f /app/pom-parent.xml -B
 # Child POM ve source'ları kopyala
 COPY microservices/account-service/pom.xml /app/microservices/account-service/
 COPY microservices/account-service/src /app/microservices/account-service/src
-# Dependency'leri indir ve build et
-RUN mvn dependency:go-offline -f /app/microservices/account-service/pom.xml -B
+# Build et (dependency'ler otomatik indirilir)
 RUN mvn clean package -f /app/microservices/account-service/pom.xml -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine

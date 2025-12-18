@@ -12,8 +12,7 @@ RUN mvn install -N -f /app/pom-parent.xml -B
 # Child POM ve source'ları kopyala
 COPY eureka-server/pom.xml /app/eureka-server/
 COPY eureka-server/src /app/eureka-server/src
-# Dependency'leri indir ve build et
-RUN mvn dependency:go-offline -f /app/eureka-server/pom.xml -B
+# Build et (dependency'ler otomatik indirilir)
 RUN mvn clean package -f /app/eureka-server/pom.xml -DskipTests
 
 FROM eclipse-temurin:21-jre-alpine
