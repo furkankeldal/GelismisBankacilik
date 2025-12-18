@@ -44,7 +44,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 		ServerHttpRequest request = exchange.getRequest();
 		String path = request.getURI().getPath();
 
-		// Public path kontrolü
+		// Public path kontrolü (en önce kontrol et)
 		if (isPublicPath(path)) {
 			log.info("Public path - Authentication bypassed: {}", path);
 			return chain.filter(exchange);
@@ -92,21 +92,27 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
 	private boolean isPublicPath(String path) {
 		if (publicPaths == null || publicPaths.length == 0) {
+			log.debug("No public paths configured");
 			return false;
 		}
+		
+		// /actuator için özel kontrol: path içinde /actuator varsa public kabul et
+		// Bu sayede /customer-service/actuator/health gibi path'ler de çalışır
+		// Eureka discovery locator ile oluşan path'ler için: /{service-name}/actuator/**
+		if (path.contains("/actuator")) {
+			log.info("Actuator path detected as public: {}", path);
+			return true;
+		}
+		
 		for (String publicPath : publicPaths) {
 			// Exact match veya starts with kontrolü
 			if (path.startsWith(publicPath)) {
-				return true;
-			}
-			// /actuator için: path içinde /actuator varsa public kabul et
-			// Bu sayede /customer-service/actuator/health gibi path'ler de çalışır
-			// Eureka discovery locator ile oluşan path'ler için: /{service-name}/actuator/**
-			if (publicPath.equals("/actuator") && path.contains("/actuator")) {
-				log.debug("Actuator path detected as public: {}", path);
+				log.debug("Public path matched (startsWith): {} -> {}", path, publicPath);
 				return true;
 			}
 		}
+		
+		log.debug("Path is not public: {}", path);
 		return false;
 	}
 
