@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: account-service
+
+  # Config Server'ı testlerde kapat
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      enabled: false
+
+  # Integration testler için PostgreSQL (CI/CD'de PostgreSQL servisi var)
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/bankdb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  # Redis auto-config testlerde devre dışı
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+      # Kafka auto-config + listener infrastructure'ı testlerde devre dışı (Kafka yok)
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+      - org.springframework.boot.autoconfigure.kafka.KafkaReactiveAutoConfiguration
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    org.springframework: WARN
+    com.example.OnlineBankacilik: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
