@@ -36,9 +36,26 @@ public class AccountServiceImpl implements AccountService {
 	private final AccountRepository accountRepository;
 	private final CustomerServiceClient customerServiceClient;
 
-	private static final AtomicLong COUNTER = new AtomicLong(1000);
+	private static final AtomicLong COUNTER = new AtomicLong(0);
+	private static volatile boolean initialized = false;
 
 	private String newAccountNo() {
+		// İlk çağrıda database'den en büyük account_no'yu al ve COUNTER'ı ayarla
+		if (!initialized) {
+			synchronized (AccountServiceImpl.class) {
+				if (!initialized) {
+					Long maxAccountNo = accountRepository.findMaxAccountNo();
+					if (maxAccountNo != null && maxAccountNo > 0) {
+						COUNTER.set(maxAccountNo);
+						log.info("Account number counter initialized from database: {}", maxAccountNo);
+					} else {
+						COUNTER.set(1000); // İlk hesap için 1000'den başla
+						log.info("Account number counter initialized to default: 1000");
+					}
+					initialized = true;
+				}
+			}
+		}
 		return String.valueOf(COUNTER.incrementAndGet());
 	}
 

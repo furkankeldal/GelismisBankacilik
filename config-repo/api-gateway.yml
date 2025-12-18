@@ -69,7 +69,7 @@ spring:
 app:
   gateway:
     auth:
-      enabled: false  # Geçici olarak devre dışı (test için)
+      enabled: true  # Authentication aktif - JWT token kontrolü yapılır
       api-key-header: X-API-Key
       jwt-header: Authorization
       public-paths:

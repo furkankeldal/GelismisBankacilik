@@ -62,7 +62,8 @@ eureka:
 
 **Ne İşe Yarar?**
 - Tüm servislerin yapılandırmalarını merkezi bir yerden yönetir
-- Git repository'den yapılandırma dosyalarını okur
+- **Native Mode**: Local dosya sisteminden (`config-repo/` klasöründen) yapılandırma dosyalarını okur
+- **Git Mode** (opsiyonel): Git repository'den yapılandırma dosyalarını okuyabilir (şu anda aktif değil)
 - Environment-specific yapılandırmalar sağlar
 - Yapılandırma değişikliklerini dinamik olarak yönetir
 
@@ -73,22 +74,39 @@ eureka:
 @EnableDiscoveryClient   // Eureka'ya kayıt olur
 ```
 
-**Yapılandırma:**
+**Yapılandırma (Native Mode - Aktif):**
 ```yaml
 spring:
+  profiles:
+    active: native  # Native mode aktif
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///${user.dir}/../config-repo,classpath:/config-repo
+```
+
+**Yapılandırma (Git Mode - Opsiyonel):**
+```yaml
+spring:
+  profiles:
+    active: git  # Git mode için
   cloud:
     config:
       server:
         git:
           uri: https://github.com/your-username/config-repo.git
           default-label: main
+          clone-on-start: true
+          force-pull: true
 ```
 
 **Nasıl Çalışır?**
-1. Config Server başlar ve Git repository'ye bağlanır
-2. Microservice'ler başlarken Config Server'dan yapılandırma alır
-3. `config-repo/` klasöründeki YAML dosyaları servislere dağıtılır
-4. Her servis kendi adıyla yapılandırma dosyasını alır (örn: `account-service.yml`)
+1. **Native Mode (Şu anki durum)**: Config Server, local dosya sistemindeki `config-repo/` klasöründen yapılandırmaları okur
+2. **Git Mode (Opsiyonel)**: Config Server, Git repository'ye bağlanır ve yapılandırmaları oradan okur
+3. Microservice'ler başlarken Config Server'dan yapılandırma alır
+4. `config-repo/` klasöründeki YAML dosyaları servislere dağıtılır
+5. Her servis kendi adıyla yapılandırma dosyasını alır (örn: `account-service.yml`)
 
 **Config Repository Yapısı:**
 ```
@@ -142,9 +160,39 @@ spring:
 5. Response'u client'a döndürür
 
 **Gateway Filtreleri (Sırayla):**
-1. **AuthenticationFilter**: JWT token doğrulama
-2. **RateLimitFilter**: Rate limiting kontrolü
-3. **RequestResponseLoggingFilter**: Loglama
+1. **RequestResponseLoggingFilter**: Request/Response loglama (ilk çalışır, order: -200)
+2. **AuthenticationFilter**: JWT token doğrulama
+3. **RateLimitFilter**: Rate limiting kontrolü
+
+**Request/Response Logları Nerede Görünür?**
+
+Loglar `@Slf4j` ile loglanır ve Spring Boot'un default logging yapılandırması kullanılır:
+
+1. **Console/Standard Output**: 
+   - IDE'de çalıştırıyorsanız: IDE console'unda görünür
+   - Terminal'de çalıştırıyorsanız: Terminal output'unda görünür
+
+2. **Docker Container Logları**:
+   ```bash
+   # Container loglarını görüntüle
+   docker logs api-gateway
+   
+   # Real-time log takibi
+   docker logs -f api-gateway
+   ```
+
+3. **Log Formatı**:
+   ```
+   [REQUEST] TraceId: <uuid>, Method: POST, Path: /api/accounts, Headers: {...}, QueryParams: {...}, RemoteAddress: /127.0.0.1:xxxxx
+   [REQUEST BODY] TraceId: <uuid>, Body: {"customerId":1,"accountType":"VADELI",...}
+   [RESPONSE] TraceId: <uuid>, Status: 200 OK, Duration: 45ms, Headers: {...}, Body: {...}
+   ```
+
+4. **Log Seviyesi**: 
+   - `com.example.gateway: INFO` (default)
+   - `org.springframework.cloud.gateway: DEBUG` (detaylı gateway logları)
+
+5. **Trace ID**: Her request için benzersiz bir UUID oluşturulur ve tüm loglarda kullanılır. Bu sayede bir request'in tüm loglarını takip edebilirsiniz.
 
 ---
 
@@ -156,11 +204,13 @@ spring:
 - Müşteri CRUD işlemleri (Create, Read, Update, Delete)
 - Müşteri bilgilerini yönetir
 - Diğer servislerin müşteri bilgilerine erişmesini sağlar
+- Redis ile cache yönetimi
 
 **Önemli Anotasyonlar:**
 ```java
 @SpringBootApplication
-@EnableDiscoveryClient  // Eureka'ya kayıt olur
+@EnableCaching           // Redis cache'i aktif eder
+@EnableDiscoveryClient    // Eureka'ya kayıt olur
 ```
 
 **API Endpoints:**
@@ -356,7 +406,7 @@ public class AccountServiceApplication {
 ```java
 @EnableCaching
 // Redis cache'i aktif eder
-// Account Service'de kullanılır
+// Account Service ve Customer Service'de kullanılır
 ```
 
 ### Feign Client Anotasyonları
@@ -619,8 +669,8 @@ eureka:
 │  │                      │  │   (transaction-events)│ │   (transaction-events)││
 │  │                      │  │                      │  │            ││
 │  │ Cache:               │  │ Cache:               │  │ Cache:     ││
-│  │ (Yok)                │  │ - Redis Cache        │  │ (Yok)      ││
-│  │                      │  │   (@Cacheable)       │  │            ││
+│  │ - Redis Cache        │  │ - Redis Cache        │  │ (Yok)      ││
+│  │   (@Cacheable)       │  │   (@Cacheable)       │  │            ││
 │  │                      │  │                      │  │            ││
 │  │ Database:            │  │ Database:            │  │ Database:  ││
 │  │ - PostgreSQL         │  │ - PostgreSQL         │  │ - PostgreSQL││
