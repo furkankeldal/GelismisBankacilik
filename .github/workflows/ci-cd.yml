@@ -61,16 +61,30 @@ jobs:
         # PostgreSQL servisi health check'i geçtikten sonra buraya gelir
         echo "PostgreSQL service should be ready (health check passed)"
 
-    - name: Run unit tests (H2 - no PostgreSQL env vars)
-      run: mvn -f pom-parent.xml test -Dtest='*Test' -DfailIfNoTests=false
+    - name: Run unit tests (H2)
+      run: |
+        # Sadece test içeren modüllerde unit test'leri çalıştır
+        mvn -f pom-parent.xml test \
+          -Dtest='*Test' \
+          -DfailIfNoTests=false \
+          -Dsurefire.failIfNoSpecifiedTests=false \
+          -pl 'microservices/account-service,microservices/customer-service,microservices/process-service' \
+          -am
       env:
-        # Unit test'ler için environment variable'ları set ETMİYORUZ
+        # Unit test'ler için PostgreSQL environment variable'ları SET ETMİYORUZ
         # Böylece application-test.yml'deki H2 yapılandırması kullanılır
         SPRING_REDIS_HOST: localhost
         SPRING_REDIS_PORT: 6379
 
     - name: Run integration tests (PostgreSQL)
-      run: mvn -f pom-parent.xml test -Dtest='*IntegrationTest' -DfailIfNoTests=false
+      run: |
+        # Integration test'leri çalıştır
+        mvn -f pom-parent.xml test \
+          -Dtest='*IntegrationTest' \
+          -DfailIfNoTests=false \
+          -Dsurefire.failIfNoSpecifiedTests=false \
+          -pl 'microservices/account-service,microservices/customer-service,microservices/process-service' \
+          -am
       env:
         # Integration test'ler için PostgreSQL environment variable'ları
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/bankdb
