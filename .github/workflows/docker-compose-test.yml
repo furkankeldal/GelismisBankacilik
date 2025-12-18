@@ -21,6 +21,9 @@ jobs:
 
     - name: Build Docker images
       run: |
+        # API Gateway'i önce no-cache ile build et (yeni kod için)
+        docker compose build --no-cache api-gateway
+        # Diğer servisleri normal build et
         docker compose build
 
     - name: Start services
@@ -42,15 +45,26 @@ jobs:
 
           echo "Waiting for $url"
           for i in $(seq 1 "$attempts"); do
-            if curl -fsS --max-time 5 "$url" >/dev/null; then
-              echo "OK: $url"
+            http_code=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 5 "$url" 2>/dev/null || echo "000")
+            if [ "$http_code" = "200" ]; then
+              echo "OK: $url (HTTP $http_code)"
               return 0
             fi
-            echo "Not ready ($i/$attempts): $url"
+            # 401 hatası için detaylı log
+            if [ "$http_code" = "401" ]; then
+              echo "Not ready ($i/$attempts): $url (HTTP $http_code - Authentication required, checking logs...)"
+              # API Gateway loglarını kontrol et
+              docker compose logs api-gateway --tail=20 | grep -i "actuator\|public\|auth" || true
+            else
+              echo "Not ready ($i/$attempts): $url (HTTP $http_code)"
+            fi
             sleep "$sleep_s"
           done
 
           echo "FAILED waiting for $url"
+          # Son denemede detaylı log göster
+          echo "=== API Gateway Logs (last 50 lines) ==="
+          docker compose logs api-gateway --tail=50 || true
           return 1
         }
 

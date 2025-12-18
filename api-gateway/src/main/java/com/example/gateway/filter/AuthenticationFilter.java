@@ -49,6 +49,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 			log.info("Public path - Authentication bypassed: {}", path);
 			return chain.filter(exchange);
 		}
+		
+		// Debug: Path ve auth durumunu logla
+		log.debug("Path requires authentication: {}, authEnabled: {}", path, authEnabled);
 
 		// Auth disabled ise bypass
 		if (!authEnabled) {
@@ -91,17 +94,18 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 	}
 
 	private boolean isPublicPath(String path) {
-		if (publicPaths == null || publicPaths.length == 0) {
-			log.debug("No public paths configured");
-			return false;
-		}
-		
 		// /actuator için özel kontrol: path içinde /actuator varsa public kabul et
 		// Bu sayede /customer-service/actuator/health gibi path'ler de çalışır
 		// Eureka discovery locator ile oluşan path'ler için: /{service-name}/actuator/**
-		if (path.contains("/actuator")) {
+		// Bu kontrolü publicPaths null kontrolünden ÖNCE yapıyoruz
+		if (path != null && path.contains("/actuator")) {
 			log.info("Actuator path detected as public: {}", path);
 			return true;
+		}
+		
+		if (publicPaths == null || publicPaths.length == 0) {
+			log.debug("No public paths configured for path: {}", path);
+			return false;
 		}
 		
 		for (String publicPath : publicPaths) {
