@@ -1,6 +1,5 @@
 package com.example.OnlineBankacilik.integration;
 
-import com.example.OnlineBankacilik.Kafka.TransactionProducer;
 import com.example.OnlineBankacilik.client.AccountServiceClient;
 import com.example.OnlineBankacilik.dto.AccountResponseDto;
 import com.example.OnlineBankacilik.dto.ProcessRequestDto;
@@ -21,12 +20,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -43,15 +40,12 @@ class ProcessServiceIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    // Dış bağımlılıkları mock'la (gerçek account-service ve Kafka yok)
+    // Dış bağımlılıkları mock'la (gerçek account-service yok)
     @MockBean
     private AccountServiceClient accountServiceClient;
 
-    @MockBean
-    private TransactionProducer transactionProducer;
-
     @Test
-    @DisplayName("Para yatırma akışı - account-service + Kafka mock'lanmış tam akış")
+    @DisplayName("Para yatırma akışı - account-service mock'lanmış tam akış")
     void depositFullFlow() throws Exception {
         String accountNo = "1001";
 
@@ -73,9 +67,6 @@ class ProcessServiceIntegrationTest {
         when(accountServiceClient.getAccount(accountNo)).thenReturn(beforeDeposit);
         when(accountServiceClient.deposit(eq(accountNo), any(TransactionRequestDto.class)))
                 .thenReturn(afterDeposit);
-
-        // Kafka producer hiçbir şey yapmasın
-        doNothing().when(transactionProducer).publish(any());
 
         // 1) Process isteği
         ProcessRequestDto request = new ProcessRequestDto();

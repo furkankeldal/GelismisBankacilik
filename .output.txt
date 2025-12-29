@@ -1,0 +1,372 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] Account Service                                                    [jar]
+[INFO] Process Service                                                    [jar]
+[INFO]
+[INFO] --------------------< com.example:account-service >---------------------
+[INFO] Building Account Service 1.0.0-SNAPSHOT                            [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ account-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ account-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ account-service ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ account-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [forked debug parameters release 21] to target\test-classes
+[WARNING] [options] --add-opens has no effect at compile time
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\controller\AccountControllerTest.java:[37,2] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\controller\AccountControllerTest.java:[37,2] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\controller\AccountControllerTest.java:[37,2] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\controller\AccountControllerTest.java:[37,2] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\controller\AccountControllerTest.java:[37,2] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[47,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[47,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[47,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[47,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[47,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[50,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[50,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[50,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[50,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[50,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[54,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[54,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[54,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[54,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[WARNING] C:\Users\kelda\git\GelismisBankacilik\microservices\account-service\src\test\java\com\example\OnlineBankacilik\integration\AccountServiceIntegrationTest.java:[54,5] [removal] MockBean in org.springframework.boot.test.mock.mockito has been deprecated and marked for removal
+[INFO]
+[INFO] --- surefire:3.5.2:test (default-test) @ account-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.OnlineBankacilik.controller.AccountControllerTest
+17:15:07.475 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.OnlineBankacilik.controller.AccountControllerTest]: AccountControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:15:07.715 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.OnlineBankacilik.AccountServiceApplication for test class com.example.OnlineBankacilik.controller.AccountControllerTest
+17:15:08.413 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.4.1)
+2025-12-29T17:15:13.021+03:00  INFO 12588 --- [account-service] [           main] c.e.O.controller.AccountControllerTest   : Starting AccountControllerTest using Java 21.0.9 with PID 12588 (started by Furkan in C:\Users\kelda\git\GelismisBankacilik\microservices\account-service)
+2025-12-29T17:15:13.027+03:00  INFO 12588 --- [account-service] [           main] c.e.O.controller.AccountControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2025-12-29T17:15:13.126+03:00  INFO 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://config-server:8888
+2025-12-29T17:15:13.127+03:00  INFO 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Exception on Url - http://config-server:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server:8888/account-service/default": config-server. Will be trying the next url if available
+2025-12-29T17:15:13.127+03:00  WARN 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@4339baec uris = array<String>['http://config-server:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server:8888/account-service/default": config-server
+2025-12-29T17:15:13.128+03:00  INFO 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://config-server:8888
+2025-12-29T17:15:13.129+03:00  INFO 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Exception on Url - http://config-server:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server:8888/account-service/default": config-server. Will be trying the next url if available
+2025-12-29T17:15:13.130+03:00  WARN 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@78d6447a uris = array<String>['http://config-server:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server:8888/account-service/default": config-server
+2025-12-29T17:15:13.130+03:00  INFO 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Fetching config from server at : http://config-server:8888
+2025-12-29T17:15:13.131+03:00  INFO 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Exception on Url - http://config-server:8888:org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://config-server:8888/account-service/default": config-server. Will be trying the next url if available
+2025-12-29T17:15:13.132+03:00  WARN 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@7a729f84 uris = array<String>['http://config-server:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server:8888/account-service/default": config-server
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\kelda\.m2\repository\net\bytebuddy\byte-buddy-agent\1.15.11\byte-buddy-agent-1.15.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2025-12-29T17:15:20.473+03:00  INFO 12588 --- [account-service] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-12-29T17:15:20.474+03:00  INFO 12588 --- [account-service] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-12-29T17:15:20.478+03:00  INFO 12588 --- [account-service] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-12-29T17:15:20.574+03:00  INFO 12588 --- [account-service] [           main] c.e.O.controller.AccountControllerTest   : Started AccountControllerTest in 12.198 seconds (process running for 15.387)
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.16 s -- in com.example.OnlineBankacilik.controller.AccountControllerTest
+[INFO] Running com.example.OnlineBankacilik.integration.AccountServiceIntegrationTest
+2025-12-29T17:15:22.353+03:00  INFO 12588 --- [account-service] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.OnlineBankacilik.integration.AccountServiceIntegrationTest]: AccountServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-12-29T17:15:22.405+03:00  INFO 12588 --- [account-service] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.OnlineBankacilik.AccountServiceApplication for test class com.example.OnlineBankacilik.integration.AccountServiceIntegrationTest
+2025-12-29T17:15:22.445+03:00  INFO 12588 --- [account-service] [           main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.4.1)
+2025-12-29T17:15:25.188+03:00  INFO 12588 --- [account-service] [           main] c.e.O.i.AccountServiceIntegrationTest    : Starting AccountServiceIntegrationTest using Java 21.0.9 with PID 12588 (started by Furkan in C:\Users\kelda\git\GelismisBankacilik\microservices\account-service)
+2025-12-29T17:15:25.189+03:00  INFO 12588 --- [account-service] [           main] c.e.O.i.AccountServiceIntegrationTest    : The following 1 profile is active: "integration"
+2025-12-29T17:15:25.193+03:00  WARN 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@3ef914f5 uris = array<String>['http://config-server:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server:8888/account-service/default": config-server
+2025-12-29T17:15:25.194+03:00  WARN 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@61e0f9b9 uris = array<String>['http://config-server:8888'], optional = true, profiles = 'integration']): I/O error on GET request for "http://config-server:8888/account-service/integration": config-server
+2025-12-29T17:15:25.194+03:00  WARN 12588 --- [account-service] [           main] o.s.c.c.c.ConfigServerConfigDataLoader   : Could not locate PropertySource ([ConfigServerConfigDataResource@2c7c898a uris = array<String>['http://config-server:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://config-server:8888/account-service/default": config-server
+2025-12-29T17:15:34.704+03:00  INFO 12588 --- [account-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-29T17:15:34.706+03:00  INFO 12588 --- [account-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-12-29T17:15:35.180+03:00  INFO 12588 --- [account-service] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-29T17:15:37.751+03:00  INFO 12588 --- [account-service] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-29T17:15:38.183+03:00  INFO 12588 --- [account-service] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-12-29T17:15:38.458+03:00  INFO 12588 --- [account-service] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-29T17:15:39.156+03:00  INFO 12588 --- [account-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-29T17:15:39.707+03:00  INFO 12588 --- [account-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7075ef91
+2025-12-29T17:15:39.710+03:00  INFO 12588 --- [account-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-29T17:15:39.780+03:00  WARN 12588 --- [account-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-29T17:15:39.817+03:00  INFO 12588 --- [account-service] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+        Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+        Database driver: undefined/unknown
+        Database version: 15.14
+        Autocommit mode: undefined/unknown
+        Isolation level: undefined/unknown
+        Minimum pool size: undefined/unknown
+        Maximum pool size: undefined/unknown
+2025-12-29T17:15:42.350+03:00  INFO 12588 --- [account-service] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-29T17:15:42.421+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    set client_min_messages = WARNING
+2025-12-29T17:15:42.429+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    drop table if exists accounts cascade
+2025-12-29T17:15:42.446+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    create table accounts (
+        active boolean not null,
+        amount numeric(19,2) not null,
+        interest_rate numeric(5,4),
+        maturity_date date,
+        maturity_month integer,
+        customer_id bigint not null,
+        opening_date timestamp(6) not null,
+        account_type varchar(20) not null,
+        account_no varchar(50) not null,
+        primary key (account_no)
+    )
+2025-12-29T17:15:47.604+03:00  WARN 12588 --- [account-service] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-29T17:15:51.371+03:00  INFO 12588 --- [account-service] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring TestDispatcherServlet ''
+2025-12-29T17:15:51.814+03:00  WARN 12588 --- [account-service] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-12-29T17:15:52.804+03:00  INFO 12588 --- [account-service] [           main] c.e.O.i.AccountServiceIntegrationTest    : Started AccountServiceIntegrationTest in 30.359 seconds (process running for 47.615)
+2025-12-29T17:15:53.360+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap a�ma i�lemi ba�lat�ld�: m��teriId=1, hesapTipi=VADESIZ
+2025-12-29T17:15:53.362+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : M��teri do�ruland�: m��teriId=1, adSoyad=Integration Customer
+2025-12-29T17:15:53.593+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    select
+        max(cast(a1_0.account_no as bigint))
+    from
+        accounts a1_0
+2025-12-29T17:15:53.694+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Account number counter initialized to default: 1000
+2025-12-29T17:15:53.745+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    select
+        fda1_0.account_no,
+        fda1_0.active,
+        fda1_0.amount,
+        fda1_0.customer_id,
+        fda1_0.opening_date
+    from
+        accounts fda1_0
+    where
+        fda1_0.account_type='VADESIZ'
+        and fda1_0.account_no=?
+2025-12-29T17:15:53.826+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap ba�ar�yla a��ld�: hesapNo=1001, m��teriId=1, bakiye=1000.00
+2025-12-29T17:15:53.866+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    insert
+    into
+        accounts
+        (active, amount, customer_id, opening_date, account_type, account_no)
+    values
+        (?, ?, ?, ?, 'VADESIZ', ?)
+2025-12-29T17:15:54.107+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para yat�rma i�lemi ba�lat�ld�: hesapNo=1001, tutar=500.00
+2025-12-29T17:15:54.115+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    select
+        a1_0.account_no,
+        a1_0.account_type,
+        a1_0.active,
+        a1_0.amount,
+        a1_0.customer_id,
+        a1_0.opening_date,
+        a1_0.interest_rate,
+        a1_0.maturity_date,
+        a1_0.maturity_month
+    from
+        accounts a1_0
+    where
+        a1_0.account_no=?
+2025-12-29T17:15:54.130+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para yat�rma i�lemi ba�ar�l�: hesapNo=1001, yeniBakiye=1500.00
+2025-12-29T17:15:54.143+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    update
+        accounts
+    set
+        active=?,
+        amount=?,
+        customer_id=?,
+        opening_date=?
+    where
+        account_no=?
+2025-12-29T17:15:54.226+03:00 DEBUG 12588 --- [account-service] [           main] org.hibernate.SQL                        :
+    select
+        a1_0.account_no,
+        a1_0.account_type,
+        a1_0.active,
+        a1_0.amount,
+        a1_0.customer_id,
+        a1_0.opening_date,
+        a1_0.interest_rate,
+        a1_0.maturity_date,
+        a1_0.maturity_month
+    from
+        accounts a1_0
+    where
+        a1_0.account_no=?
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 31.90 s -- in com.example.OnlineBankacilik.integration.AccountServiceIntegrationTest
+[INFO] Running com.example.OnlineBankacilik.service.AccountServiceTest
+2025-12-29T17:15:54.723+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para yat�rma i�lemi ba�lat�ld�: hesapNo=1001, tutar=500.00
+2025-12-29T17:15:54.725+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para yat�rma i�lemi ba�ar�l�: hesapNo=1001, yeniBakiye=1500.00
+2025-12-29T17:15:54.735+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap a�ma i�lemi ba�lat�ld�: m��teriId=1, hesapTipi=VADELI
+2025-12-29T17:15:54.736+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : M��teri do�ruland�: m��teriId=1, adSoyad=Ali Veli
+2025-12-29T17:15:54.736+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap ba�ar�yla a��ld�: hesapNo=1002, m��teriId=1, bakiye=5000.00
+2025-12-29T17:15:54.745+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap kapatma i�lemi ba�lat�ld�: hesapNo=1001
+2025-12-29T17:15:54.746+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap ba�ar�yla kapat�ld�: hesapNo=1001
+2025-12-29T17:15:54.756+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para �ekme i�lemi ba�lat�ld�: hesapNo=1001, tutar=200.00
+2025-12-29T17:15:54.758+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para �ekme i�lemi ba�ar�l�: hesapNo=1001, yeniBakiye=800.00
+2025-12-29T17:15:54.787+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap a�ma i�lemi ba�lat�ld�: m��teriId=1, hesapTipi=VADESIZ
+2025-12-29T17:15:54.788+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : M��teri do�ruland�: m��teriId=1, adSoyad=Ali Veli
+2025-12-29T17:15:54.788+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap ba�ar�yla a��ld�: hesapNo=1001, m��teriId=1, bakiye=1000.00
+2025-12-29T17:15:54.805+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Para �ekme i�lemi ba�lat�ld�: hesapNo=1001, tutar=2000.00
+2025-12-29T17:15:54.806+03:00  WARN 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Yetersiz bakiye: hesapNo=1001, mevcut=1000.00, istenen=2000.00
+2025-12-29T17:15:54.815+03:00  INFO 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : Hesap a�ma i�lemi ba�lat�ld�: m��teriId=1, hesapTipi=VADESIZ
+2025-12-29T17:15:54.816+03:00 ERROR 12588 --- [account-service] [           main] c.e.O.service.impl.AccountServiceImpl    : M��teri do�rulama hatas�: m��teriId=1
+java.lang.RuntimeException: M��teri bulunamad�: 1
+        at com.example.OnlineBankacilik.service.impl.AccountServiceImpl.accountOpen(AccountServiceImpl.java:97) ~[classes/:na]
+        at com.example.OnlineBankacilik.service.AccountServiceTest.lambda$testAccountOpen_CustomerNotFound_ThrowsException$2(AccountServiceTest.java:144) ~[test-classes/:na]
+        at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53) ~[junit-jupiter-api-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35) ~[junit-jupiter-api-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128) ~[junit-jupiter-api-5.11.4.jar:5.11.4]
+        at com.example.OnlineBankacilik.service.AccountServiceTest.testAccountOpen_CustomerNotFound_ThrowsException(AccountServiceTest.java:144) ~[test-classes/:na]
+        at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+        at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+        at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:767) ~[junit-platform-commons-1.11.4.jar:1.11.4]
+        at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$8(TestMethodTestDescriptor.java:217) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.11.4.jar:5.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+        at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+        at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47) ~[junit-platform-launcher-1.11.4.jar:1.11.4]
+        at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122) ~[surefire-junit-platform-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.2.jar:3.5.2]
+        at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.2.jar:3.5.2]
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.559 s -- in com.example.OnlineBankacilik.service.AccountServiceTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --------------------< com.example:process-service >---------------------
+[INFO] Building Process Service 1.0.0-SNAPSHOT                            [2/2]
+[INFO]   from C:\Users\kelda\git\GelismisBankacilik\microservices\process-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ process-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ process-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ process-service ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ process-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING :
+[INFO] -------------------------------------------------------------
+[WARNING] [options] --add-opens has no effect at compile time
+[INFO] 1 warning
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR :
+[INFO] -------------------------------------------------------------
+[ERROR] C:\Users\kelda\git\GelismisBankacilik\microservices\process-service\src\test\java\com\example\OnlineBankacilik\integration\ProcessServiceIntegrationTest.java:[3,41] error: package com.example.OnlineBankacilik.Kafka does not exist
+[ERROR] C:\Users\kelda\git\GelismisBankacilik\microservices\process-service\src\test\java\com\example\OnlineBankacilik\integration\ProcessServiceIntegrationTest.java:[51,12] error: cannot find symbol
+  symbol:   class TransactionProducer
+  location: class ProcessServiceIntegrationTest
+[INFO] 2 errors
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Account Service 1.0.0-SNAPSHOT:
+[INFO]
+[INFO] Account Service .................................... SUCCESS [01:07 min]
+[INFO] Process Service .................................... FAILURE [  7.722 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:17 min
+[INFO] Finished at: 2025-12-29T17:16:02+03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project process-service: Compilation failure: Compilation failure:
+[ERROR] C:\Users\kelda\git\GelismisBankacilik\microservices\process-service\src\test\java\com\example\OnlineBankacilik\integration\ProcessServiceIntegrationTest.java:[3,41] error: package com.example.OnlineBankacilik.Kafka does not exist
+[ERROR] C:\Users\kelda\git\GelismisBankacilik\microservices\process-service\src\test\java\com\example\OnlineBankacilik\integration\ProcessServiceIntegrationTest.java:[51,12] error: cannot find symbol
+[ERROR]   symbol:   class TransactionProducer
+[ERROR]   location: class ProcessServiceIntegrationTest
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR]
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :process-service

@@ -15,14 +15,18 @@ import com.example.OnlineBankacilik.client.CustomerServiceClient;
 import com.example.OnlineBankacilik.dto.AccountRequestDto;
 import com.example.OnlineBankacilik.dto.AccountResponseDto;
 import com.example.OnlineBankacilik.dto.CustomerResponseDto;
+import com.example.OnlineBankacilik.dto.TransactionEvent;
 import com.example.OnlineBankacilik.dto.TransactionRequestDto;
 import com.example.OnlineBankacilik.entity.Account;
 import com.example.OnlineBankacilik.entity.FixedDepositAccount;
 import com.example.OnlineBankacilik.entity.FuturesAccount;
 import com.example.OnlineBankacilik.enums.AccountType;
 import com.example.OnlineBankacilik.exception.AccountNotFoundException;
+import com.example.OnlineBankacilik.exception.InsufficientBalanceException;
+import com.example.OnlineBankacilik.exception.InvalidAmountException;
 import com.example.OnlineBankacilik.repository.AccountRepository;
 import com.example.OnlineBankacilik.service.AccountService;
+import com.example.OnlineBankacilik.Kafka.TransactionProducer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +39,7 @@ public class AccountServiceImpl implements AccountService {
 
 	private final AccountRepository accountRepository;
 	private final CustomerServiceClient customerServiceClient;
+	private final TransactionProducer transactionProducer;
 
 	private static final AtomicLong COUNTER = new AtomicLong(0);
 	private static volatile boolean initialized = false;
@@ -184,11 +189,26 @@ public class AccountServiceImpl implements AccountService {
 		
 		if (request.getAmount() == null || request.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
 			log.warn("Geçersiz tutar: hesapNo={}, tutar={}", accountNo, request.getAmount());
-			throw new RuntimeException("Miktar 0'dan büyük olmalıdır");
+			throw new InvalidAmountException();
 		}
 		
+		BigDecimal previousBalance = account.getAmount();
 		account.deposit(request.getAmount());
 		Account saved = accountRepository.save(account);
+		
+		// Kafka notification
+		transactionProducer.publish(new TransactionEvent(
+				java.util.UUID.randomUUID().toString(),
+				saved.getAccountNo(),
+				saved.getCustomerId(),
+				com.example.OnlineBankacilik.enums.TransactionType.YATIRMA,
+				request.getAmount(),
+				previousBalance,
+				saved.getAmount(),
+				true,
+				LocalDateTime.now()
+		));
+
 		log.info("Para yatırma işlemi başarılı: hesapNo={}, yeniBakiye={}", accountNo, saved.getAmount());
 		return toDto(saved);
 	}
@@ -207,17 +227,32 @@ public class AccountServiceImpl implements AccountService {
 		
 		if (request.getAmount() == null || request.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
 			log.warn("Geçersiz tutar: hesapNo={}, tutar={}", accountNo, request.getAmount());
-			throw new RuntimeException("Miktar 0'dan büyük olmalıdır");
+			throw new InvalidAmountException();
 		}
 		
 		if (account.getAmount().compareTo(request.getAmount()) < 0) {
 			log.warn("Yetersiz bakiye: hesapNo={}, mevcut={}, istenen={}", 
 					accountNo, account.getAmount(), request.getAmount());
-			throw new RuntimeException("Bakiye yetersiz. Mevcut: " + account.getAmount() + ", istenen: " + request.getAmount());
+			throw new InsufficientBalanceException(account.getAmount(), request.getAmount());
 		}
 		
+		BigDecimal previousBalance = account.getAmount();
 		account.withdraw(request.getAmount());
 		Account saved = accountRepository.save(account);
+
+		// Kafka notification
+		transactionProducer.publish(new TransactionEvent(
+				java.util.UUID.randomUUID().toString(),
+				saved.getAccountNo(),
+				saved.getCustomerId(),
+				com.example.OnlineBankacilik.enums.TransactionType.CEKME,
+				request.getAmount(),
+				previousBalance,
+				saved.getAmount(),
+				true,
+				LocalDateTime.now()
+		));
+
 		log.info("Para çekme işlemi başarılı: hesapNo={}, yeniBakiye={}", accountNo, saved.getAmount());
 		return toDto(saved);
 	}

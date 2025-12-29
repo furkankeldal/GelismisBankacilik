@@ -19,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.example.OnlineBankacilik.Kafka.TransactionProducer;
 import com.example.OnlineBankacilik.client.CustomerServiceClient;
 import com.example.OnlineBankacilik.dto.AccountRequestDto;
 import com.example.OnlineBankacilik.dto.AccountResponseDto;
@@ -28,6 +29,8 @@ import com.example.OnlineBankacilik.entity.FixedDepositAccount;
 import com.example.OnlineBankacilik.entity.FuturesAccount;
 import com.example.OnlineBankacilik.enums.AccountType;
 import com.example.OnlineBankacilik.exception.AccountNotFoundException;
+import com.example.OnlineBankacilik.exception.InsufficientBalanceException;
+import com.example.OnlineBankacilik.exception.InvalidAmountException;
 import com.example.OnlineBankacilik.repository.AccountRepository;
 import com.example.OnlineBankacilik.service.impl.AccountServiceImpl;
 
@@ -40,6 +43,9 @@ class AccountServiceTest {
 
 	@Mock
 	private CustomerServiceClient customerServiceClient;
+
+	@Mock
+	private TransactionProducer transactionProducer;
 
 	@InjectMocks
 	private AccountServiceImpl accountService;
@@ -184,6 +190,7 @@ class AccountServiceTest {
 
 		when(accountRepository.findById("1001")).thenReturn(Optional.of(testAccount));
 		when(accountRepository.save(any(FixedDepositAccount.class))).thenReturn(accountWithDeposit);
+		doNothing().when(transactionProducer).publish(any());
 
 		// When
 		AccountResponseDto result = accountService.deposit("1001", depositRequest);
@@ -193,6 +200,7 @@ class AccountServiceTest {
 		assertEquals(new BigDecimal("1500.00"), result.getAmount());
 		verify(accountRepository, times(1)).findById("1001");
 		verify(accountRepository, times(1)).save(any(FixedDepositAccount.class));
+		verify(transactionProducer, times(1)).publish(any());
 	}
 
 	@Test
@@ -212,6 +220,7 @@ class AccountServiceTest {
 
 		when(accountRepository.findById("1001")).thenReturn(Optional.of(testAccount));
 		when(accountRepository.save(any(FixedDepositAccount.class))).thenReturn(accountAfterWithdraw);
+		doNothing().when(transactionProducer).publish(any());
 
 		// When
 		AccountResponseDto result = accountService.withdraw("1001", withdrawRequest);
@@ -221,6 +230,7 @@ class AccountServiceTest {
 		assertEquals(new BigDecimal("800.00"), result.getAmount());
 		verify(accountRepository, times(1)).findById("1001");
 		verify(accountRepository, times(1)).save(any(FixedDepositAccount.class));
+		verify(transactionProducer, times(1)).publish(any());
 	}
 
 	@Test
@@ -234,7 +244,7 @@ class AccountServiceTest {
 		when(accountRepository.findById("1001")).thenReturn(Optional.of(testAccount));
 
 		// When & Then
-		assertThrows(RuntimeException.class, () -> accountService.withdraw("1001", withdrawRequest));
+		assertThrows(InsufficientBalanceException.class, () -> accountService.withdraw("1001", withdrawRequest));
 		verify(accountRepository, times(1)).findById("1001");
 		verify(accountRepository, never()).save(any());
 	}

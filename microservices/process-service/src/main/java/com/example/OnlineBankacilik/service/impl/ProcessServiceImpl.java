@@ -6,12 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.OnlineBankacilik.Kafka.TransactionProducer;
 import com.example.OnlineBankacilik.client.AccountServiceClient;
 import com.example.OnlineBankacilik.dto.AccountResponseDto;
 import com.example.OnlineBankacilik.dto.ProcessRequestDto;
 import com.example.OnlineBankacilik.dto.ProcessResponseDto;
-import com.example.OnlineBankacilik.dto.TransactionEvent;
 import com.example.OnlineBankacilik.dto.TransactionRequestDto;
 import com.example.OnlineBankacilik.enums.AccountType;
 import com.example.OnlineBankacilik.enums.TransactionType;
@@ -34,7 +32,6 @@ public class ProcessServiceImpl implements ProcessService {
 
 	private final ProcessRepository processRepository;
 	private final AccountServiceClient accountServiceClient;
-	private final TransactionProducer transactionProducer;
 
 	private AccountResponseDto getAccount(String accountNo) {
 		try {
@@ -110,20 +107,6 @@ public class ProcessServiceImpl implements ProcessService {
 		process.setSuccessful(true);
 		Process saved = processRepository.save(process);
 
-		TransactionEvent event = new TransactionEvent(saved.getTransactionCode(),
-				saved.getAccountNo(),
-				saved.getCustomerId(),
-				saved.getTransactionType(),
-				saved.getAmount(),
-				saved.getPreviousBalance(),
-				saved.getNewBalance(),
-				saved.isSuccessful(),
-				saved.getTransactionDate()
-		);
-
-		transactionProducer.publish(event);
-		log.info("Kafka'ya gönderilen deposit event: {}", event);
-
 		return toDto(saved, updatedAccount);
 	}
 
@@ -159,20 +142,6 @@ public class ProcessServiceImpl implements ProcessService {
 		process.setExplanation(dto.getExplanation());
 		process.setSuccessful(true);
 		Process saved = processRepository.save(process);
-
-		TransactionEvent event = new TransactionEvent(saved.getTransactionCode(),
-				saved.getAccountNo(),
-				saved.getCustomerId(),
-				saved.getTransactionType(),
-				saved.getAmount(),
-				saved.getPreviousBalance(),
-				saved.getNewBalance(),
-				saved.isSuccessful(),
-				saved.getTransactionDate()
-		);
-
-		transactionProducer.publish(event);
-		log.info("Kafka'ya gönderilen withdraw event: {}", event);
 
 		return toDto(saved, updatedAccount);
 	}

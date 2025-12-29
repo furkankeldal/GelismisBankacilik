@@ -17,7 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.example.OnlineBankacilik.Kafka.TransactionProducer;
 import com.example.OnlineBankacilik.client.AccountServiceClient;
 import com.example.OnlineBankacilik.dto.AccountResponseDto;
 import com.example.OnlineBankacilik.dto.ProcessRequestDto;
@@ -40,9 +39,6 @@ class ProcessServiceTest {
 
 	@Mock
 	private AccountServiceClient accountServiceClient;
-
-	@Mock
-	private TransactionProducer transactionProducer;
 
 	@InjectMocks
 	private ProcessServiceImpl processService;
@@ -95,7 +91,6 @@ class ProcessServiceTest {
 		when(processRepository.save(any(Process.class))).thenReturn(testProcess);
 		when(accountServiceClient.deposit(eq("1001"), any(TransactionRequestDto.class)))
 				.thenReturn(testAccount);
-		doNothing().when(transactionProducer).publish(any());
 
 		// When
 		ProcessResponseDto result = processService.deposit(testDepositRequest);
@@ -110,7 +105,6 @@ class ProcessServiceTest {
 		verify(accountServiceClient, times(1)).getAccount("1001");
 		verify(accountServiceClient, times(1)).deposit(eq("1001"), any(TransactionRequestDto.class));
 		verify(processRepository, times(1)).save(any(Process.class));
-		verify(transactionProducer, times(1)).publish(any());
 	}
 
 	@Test
@@ -151,7 +145,6 @@ class ProcessServiceTest {
 		when(processRepository.save(any(Process.class))).thenReturn(withdrawProcess);
 		when(accountServiceClient.withdraw(eq("1001"), any(TransactionRequestDto.class)))
 				.thenReturn(updatedAccount);
-		doNothing().when(transactionProducer).publish(any());
 
 		// When
 		ProcessResponseDto result = processService.withdraw(testWithdrawRequest);
